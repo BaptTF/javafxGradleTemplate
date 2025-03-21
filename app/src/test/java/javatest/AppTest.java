@@ -4,11 +4,20 @@
 package javatest;
 
 import org.junit.jupiter.api.Test;
+
+import javafx.stage.Stage;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 class AppTest {
-    @Test void appHasAGreeting() {
-        App classUnderTest = new App();
-        assertNotNull(classUnderTest.getGreeting(), "app should have a greeting");
+    @Test
+    void testHasStartMethod() {
+        try {
+            Class<?> appClass = App.class;
+            assertNotNull(appClass.getDeclaredMethod("start", Stage.class),
+                "App class should have a start method taking a Stage parameter");
+        } catch (NoSuchMethodException e) {
+            fail("start method not found in App class");
+        }
     }
 }
